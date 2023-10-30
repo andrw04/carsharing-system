@@ -1,0 +1,1 @@
+CONNECTION_STRING = 'dbname=db user=postgres password=postgres'

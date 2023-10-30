@@ -1,12 +1,13 @@
 CREATE TABLE IF NOT EXISTS brands (
     id SERIAL NOT NULL PRIMARY KEY,
-    name VARCHAR NOT NULL
+    name VARCHAR NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS models (
     id SERIAL NOT NULL PRIMARY KEY,
-    name VARCHAR NOT NULL,
-    brand_id SERIAL REFERENCES brands (id)
+    name VARCHAR NOT NULL UNIQUE,
+    brand_id SERIAL REFERENCES brands (id),
+    image VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS car_statuses (
@@ -20,8 +21,8 @@ CREATE TABLE IF NOT EXISTS cars (
     color VARCHAR NOT NULL,
     model_id SERIAL REFERENCES models (id),
     year INTEGER NOT NULL,
-    license_plate_number VARCHAR NOT NULL,
-    vin VARCHAR NOT NULL,
+    license_plate_number VARCHAR NOT NULL UNIQUE,
+    vin VARCHAR NOT NULL UNIQUE,
     car_status_id SERIAL REFERENCES car_statuses (id),
     latitude NUMERIC NOT NULL,
     longitude NUMERIC NOT NULL
@@ -31,12 +32,12 @@ CREATE TABLE IF NOT EXISTS users (
     id SERIAL NOT NULL PRIMARY KEY,
     username VARCHAR NOT NULL UNIQUE,
     password VARCHAR NOT NULL,
-    driving_license VARCHAR NOT NULL,
+    driving_license VARCHAR NOT NULL UNIQUE,
     first_name VARCHAR NOT NULL,
     last_name VARCHAR NOT NULL,
-    email VARCHAR NOT NULL,
-    phone VARCHAR NOT NULL,
-    balance NUMERIC NOT NULL
+    email VARCHAR NOT NULL UNIQUE,
+    phone VARCHAR NOT NULL UNIQUE,
+    balance NUMERIC NOT NULL DEFAULT 0 CHECK(balance >= 0)
 );
 
 CREATE TABLE IF NOT EXISTS tariffs (
@@ -67,7 +68,7 @@ CREATE TABLE IF NOT EXISTS fines (
 
 CREATE TABLE IF NOT EXISTS discounts (
     id SERIAL NOT NULL PRIMARY KEY,
-    title VARCHAR NOT NULL,
+    title VARCHAR NOT NULL UNIQUE,
     description TEXT NOT NULL,
     value INTEGER NOT NULL
 );

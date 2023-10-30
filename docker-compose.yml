@@ -2,6 +2,7 @@ version: '3'
 
 services:
   db:
+    container_name: database
     image: postgres
     environment:
       POSTGRES_USER: postgres
@@ -13,8 +14,11 @@ services:
       - ./init-scripts:/docker-entrypoint-initdb.d
   
   web:
+    container_name: carsharing-api
     build: .
     ports:
       - 5000:5000
     depends_on:
       - db
+
+  

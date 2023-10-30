@@ -1,12 +1,10 @@
 from flask import Flask, render_template
+from app.queries import GET_USERS
+from app.config import CONNECTION_STRING
 import os
+import psycopg2
 
 app = Flask(__name__)
-
-
-@app.route('/')
-def home():
-    return render_template('index.html')
 
 
 if __name__ == "__main__":
