@@ -51,10 +51,10 @@ CREATE TABLE IF NOT EXISTS driving_sessions (
     user_id SERIAL REFERENCES users (id)  ON DELETE CASCADE,
     car_id SERIAL REFERENCES cars (id)  ON DELETE CASCADE,
     start_time TIMESTAMP NOT NULL,
-    end_time TIMESTAMP NOT NULL,
+    end_time TIMESTAMP,
     tariff_id SERIAL NOT NULL REFERENCES tariffs (id)  ON DELETE CASCADE,
-    total NUMERIC NOT NULL,
-    total_discount NUMERIC NOT NULL
+    total NUMERIC,
+    total_discount NUMERIC
 );
 
 CREATE TABLE IF NOT EXISTS fines (
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS fines (
     user_id SERIAL REFERENCES users (id)  ON DELETE CASCADE,
     date_and_time TIMESTAMP NOT NULL,
     description TEXT NOT NULL,
-    fine_status BOOLEAN NOT NULL,
+    fine_status BOOLEAN NOT NULL DEFAULT TRUE,
     price NUMERIC NOT NULL
 );
 

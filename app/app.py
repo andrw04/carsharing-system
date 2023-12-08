@@ -1,6 +1,5 @@
 from flask import Flask, render_template
-from app.queries import GET_USERS
-from app.config import CONNECTION_STRING
+from config import CONNECTION_STRING
 import os
 import psycopg2
 
